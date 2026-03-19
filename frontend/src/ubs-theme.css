@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Header */
+.ubs-header {
+  background-color: #000000;
+  border-bottom: 3px solid #e60028;
+  padding: 16px 24px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Layout */
+.container {
+  padding: 30px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Card panel */
+.card {
+  background: #262626;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  border: none;
+  background: #333;
+  color: white;
+}
+
+/* Button */
+button {
+  background-color: #e60028;
+  border: none;
+  padding: 12px 20px;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c40020;
+}
+
+/* Result box */
+.result {
+  margin-top: 20px;
+  background: #111;
+  padding: 15px;
+  border-left: 4px solid #e60028;
+}

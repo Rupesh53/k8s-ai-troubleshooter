@@ -7,7 +7,7 @@ def get_namespace_events(namespace):
         config.load_kube_config()
 
     v1 = client.CoreV1Api()
-    events = v1.list_namespaced_event(namespace)
+    events = v1.list_namespaced_event(namespace, limit=2)
 
     event_list = []
 

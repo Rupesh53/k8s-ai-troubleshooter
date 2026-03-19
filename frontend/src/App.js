@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ubs-theme.css";
 
 function App() {
 
@@ -6,11 +7,28 @@ function App() {
   const [application, setApplication] = useState("");
   const [cluster, setCluster] = useState("");
   const [namespace, setNamespace] = useState("");
-  const [output, setOutput] = useState("");
+  const [result, setResult] = useState("");
+  
+  const runCopilot = async () => {
 
-  const submitForm = async () => {
+  const res = await fetch(`http://localhost:8000/copilot/${namespace}`);
 
-    const response = await fetch("http://localhost:8000/analyze", {
+  const data = await res.json();
+
+  setResult(data.analysis);
+};
+  const watchNamespace = async () => {
+
+  const res = await fetch(`http://localhost:8000/watch/${namespace}`);
+
+  const data = await res.json();
+
+  setResult(data.analysis);
+};
+  const submitForm = async (e) => {
+    e.preventDefault();
+
+    const res = await fetch("http://localhost:8000/analyze", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -23,42 +41,74 @@ function App() {
       })
     });
 
-    const data = await response.json();
-
-    setOutput(
-      "Events:\n" +
-      data.events +
-      "\n\nAI Analysis:\n" +
-      data.analysis
-    );
+    const data = await res.json();
+    setResult(data.analysis);
   };
 
   return (
+    <div>
 
-    <div style={{padding:"40px"}}>
+      <div className="ubs-header">
+        UK8s-UBS AI Kubernetes Copilot
+      </div>
 
-      <h2>Kubernetes AI Troubleshooter</h2>
+      <div className="container">
 
-      <input placeholder="Environment"
-      onChange={(e)=>setEnvironment(e.target.value)} /><br/><br/>
+        <div className="card">
 
-      <input placeholder="Application Name"
-      onChange={(e)=>setApplication(e.target.value)} /><br/><br/>
+          <h3>Cluster Diagnostic Request</h3>
 
-      <input placeholder="Cluster"
-      onChange={(e)=>setCluster(e.target.value)} /><br/><br/>
+          <form onSubmit={submitForm}>
 
-      <input placeholder="Namespace"
-      onChange={(e)=>setNamespace(e.target.value)} /><br/><br/>
+            <label>Environment</label>
+            <input
+              value={environment}
+              onChange={(e) => setEnvironment(e.target.value)}
+            />
 
-      <button onClick={submitForm}>Analyze</button>
+            <label>Application</label>
+            <input
+              value={application}
+              onChange={(e) => setApplication(e.target.value)}
+            />
 
-      <pre style={{marginTop:"30px"}}>
-        {output}
-      </pre>
+            <label>Cluster</label>
+            <input
+              value={cluster}
+              onChange={(e) => setCluster(e.target.value)}
+            />
+
+            <label>Namespace</label>
+            <input
+              value={namespace}
+              onChange={(e) => setNamespace(e.target.value)}
+            />
+
+            {/* <button type="submit">
+              Analyze Kubernetes Events
+            </button> */}
+            
+
+            <button type="button" onClick={watchNamespace}>
+            Watch Namespace for Incidents
+            </button>
+            <button type="button" onClick={runCopilot}>
+            Run AI Copilot
+            </button>
+          </form>
+
+          {result && (
+            <div className="result">
+              <h4>AI Root Cause Analysis</h4>
+              <p>{result}</p>
+            </div>
+          )}
+
+        </div>
+
+      </div>
 
     </div>
-
   );
 }
 

@@ -5,7 +5,7 @@ def ask_ollama(prompt):
     url = "http://localhost:11434/api/generate"
 
     payload = {
-        "model": "llama3",
+        "model": "mistral",
         "prompt": prompt,
         "stream": False
     }
