@@ -260,10 +260,10 @@ project-root
 * Kubernetes event timeline
 * Real-time cluster monitoring
 * Grafana-style dashboard
+* Need to integrate k8s network health check 
 
 ---
 
 # Author
-Rupesh Nayak
 
 Rupesh Nayak
