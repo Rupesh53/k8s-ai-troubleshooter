@@ -1,4 +1,4 @@
-# UBS AI Kubernetes Troubleshooter
+# Generic AI Kubernetes Troubleshooter
 
 This project is a demo **AI-powered Kubernetes troubleshooting tool**.
 
